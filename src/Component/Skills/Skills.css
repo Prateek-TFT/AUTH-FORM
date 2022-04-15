@@ -1,0 +1,42 @@
+.skillsdiv {
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  width: 10vw;
+}
+.skillContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: 10vw;
+}
+.heading {
+  font-weight: 700;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 100%;
+}
+@media screen and (max-width: 920px) {
+  .skillContainer {
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .skillsdiv {
+    display: flex;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .skillContainer {
+    width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .skillsdiv {
+    display: flex;
+    width: 50%;
+  }
+}

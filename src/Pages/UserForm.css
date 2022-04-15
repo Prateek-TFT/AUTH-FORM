@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  background-color: gray;
+}
+.box {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.heading_div {
+  height: 7.5vh;
+  width: 70vw;
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: black;
+}
+.input_div {
+  padding-bottom: 0vh;
+  padding: 2.5vh;
+  box-sizing: border-box;
+  height: 60vh;
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: white;
+}
+.buttonContainer {
+  height: 15vh;
+  width: 70vw;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.align_gender {
+  display: block;
+  margin: 0%;
+}
+.buttonContainer input {
+  display: inline;
+}
+.buttonContainer p {
+  display: inline;
+}
+.buttonContainer button:hover {
+  background-color: rgb(33, 30, 30);
+  height: 4.8vh;
+  width: 9.5vw;
+}
+.buttonAlign {
+  display: flex;
+  flex-direction: column;
+  width: 14vw;
+  height: 10vh;
+  align-items: center;
+}
+.buttonAlign button {
+  height: 5vh;
+  width: 10vw;
+  border: 0;
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+}
+.trm_text {
+  color: red;
+  font-weight: 500;
+  font-size: 13px;
+  word-break: normal;
+  margin: 0;
+  padding-left: 0%;
+  text-align: center;
+}
+
+.formcontrol {
+  width: 15vw;
+  margin: 0px !important;
+}
+@media screen and (max-width: 920px) {
+  .box {
+    flex-wrap: nowrap;
+    height: auto;
+  }
+  .formcontrol {
+    width: 50vw;
+  }
+  .input_div {
+    height: 100%;
+    flex-wrap: nowrap;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    width: 95vw;
+  }
+  .heading_div {
+    height: 5vh;
+    width: 95vw;
+  }
+  .buttonContainer {
+    height: auto;
+    width: 95vw;
+  }
+  .buttonAlign button {
+    height: 5vh;
+    width: 20vw;
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .formcontrol {
+    width: 80vw;
+  }
+  .buttonAlign button {
+    height: 5vh;
+    width: 30vw;
+    font-size: 1rem;
+  }
+}
