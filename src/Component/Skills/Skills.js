@@ -1,17 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ErrorText } from "../Input/ErrorText";
+import { TechnicalSkills } from "../Utils";
 import { checkForEmpty } from "../Validations/Validations";
 import "./Skills.css";
 export const Skills = (props) => {
   const [skills, setSkills] = useState([]);
-  const Skills = [
-    { value: "C" },
-    { value: "C++" },
-    { value: "Python" },
-    { value: "Java" },
-    { value: "React-Js" },
-    { value: "React-Native" },
-  ];
   const handleChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
@@ -29,7 +22,7 @@ export const Skills = (props) => {
     <>
       <div className="skillContainer">
         <p className="heading">Skills:-</p>
-        {Skills.map((data, index) => {
+        {TechnicalSkills.map((data, index) => {
           return (
             <div key={index} className="skillsdiv">
               <input

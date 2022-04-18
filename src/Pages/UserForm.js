@@ -1,11 +1,6 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import "./UserForm.css";
 import Myinput from "../Component/Input/Myinput";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import React, { useEffect, useState } from "react";
-import { ErrorText } from "../Component/Input/ErrorText";
-
+import React, { useState } from "react";
 import {
   checkForEmpty,
   validateEmail,
@@ -18,32 +13,17 @@ import {
 import { Skills } from "../Component/Skills/Skills";
 import { Validator } from "../Component/Validations/Validator";
 import { Gender } from "../Component/Gender/Gender";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-const hobbies = ["cricket", "football", "ludo", "Reading", "Music"];
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+import { SingleSelect } from "../Component/Select/SingleSelect";
+import { MultiSelect } from "../Component/Select/MultiSelect";
+import { DeveloperType, HobbiesData, ProffesionType } from "../Component/Utils";
+
 function UserForm() {
-  const theme = useTheme();
   const [userData, setUserData] = useState({
     Name: "",
     Email: "",
     Phone: "",
     Proffesion: "",
+    DeveloperType: "",
     UserName: "",
     Password: "",
     ConfirmPassword: "",
@@ -51,6 +31,56 @@ function UserForm() {
     Gender: "",
     Skills: [],
   });
+  const InputData = [
+    {
+      value: userData.Name,
+      name: "Name",
+      title: "Name",
+      validation: checkForEmpty(userData.Name),
+      Mandatory: true,
+    },
+    {
+      value: userData.Email,
+      name: "Email",
+      title: "Email",
+      validation: validateEmail(userData.Email),
+      Mandatory: true,
+    },
+    {
+      value: userData.Phone,
+      type: "number",
+      name: "Phone",
+      title: "Phone",
+      validation: phoneValidation(userData.Phone),
+      Mandatory: true,
+    },
+    {
+      value: userData.UserName,
+      name: "UserName",
+      title: "UserName",
+      validation: validateUserName(userData.UserName),
+      Mandatory: true,
+    },
+    {
+      value: userData.Password,
+      name: "Password",
+      title: "Password",
+      validation: validatePassword(userData.Password),
+      Mandatory: true,
+      isPassword: true,
+    },
+    {
+      value: userData.ConfirmPassword,
+      name: "ConfirmPassword",
+      title: "Confirm-Password",
+      validation: validateConfirmPassword(
+        userData.Password,
+        userData.ConfirmPassword
+      ),
+      Mandatory: true,
+      isPassword: true,
+    },
+  ];
   const [shouldPerformValidation, setshouldPerformValidation] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleChange = (e) => {
@@ -68,143 +98,67 @@ function UserForm() {
     }));
   };
   const SubmitHandler = () => {
-    setshouldPerformValidation(true);
-    Validator(userData, checked);
+    Validator(
+      userData,
+      checked,
+      setChecked,
+      setUserData,
+      setshouldPerformValidation
+    );
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setshouldPerformValidation(false);
-    }, 5000);
-  }, [shouldPerformValidation]);
   return (
     <div className="box">
       <div className="heading_div">
         <h1>User Form</h1>
       </div>
       <div className="input_div">
-        <Myinput
-          name="Name"
+        {InputData.map((item) => {
+          return (
+            <Myinput
+              type={item.type}
+              value={item.value}
+              name={item.name}
+              onChange={handleChange}
+              Mandatory={item.Mandatory}
+              title={item.title}
+              isPassword={item.isPassword}
+              errortext={shouldPerformValidation ? item.validation : ""}
+            ></Myinput>
+          );
+        })}
+        <SingleSelect
+          className="select1"
+          title="Proffesion"
+          name="Proffesion"
+          value={userData.Proffesion}
           onChange={handleChange}
-          Mandatory={true}
-          title="Name"
-          errortext={
-            shouldPerformValidation ? checkForEmpty(userData.Name) : ""
-          }
-        ></Myinput>
-        <Myinput
-          name="Email"
-          Mandatory={true}
-          onChange={handleChange}
-          title="Email"
-          errortext={
-            shouldPerformValidation ? validateEmail(userData.Email) : ""
-          }
-        ></Myinput>
-        <Myinput
-          name="Phone"
-          Mandatory={true}
-          onChange={handleChange}
-          title="Phone"
-          errortext={
-            shouldPerformValidation ? phoneValidation(userData.Phone) : ""
-          }
-        ></Myinput>
-        <FormControl sx={{ m: 1 }} className="formcontrol">
-          <InputLabel
-            sx={{ fontSize: 11, fontWeight: 600 }}
-            id="demo-multiple-name-label"
-          >
-            Profession
-          </InputLabel>
-          <Select
-            sx={{ height: 40 }}
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
-            name="Proffesion"
-            value={userData.Proffesion}
+          label="Proffesion"
+          validate={shouldPerformValidation}
+          data={ProffesionType}
+        />
+        {userData.Proffesion && (
+          <SingleSelect
+            className="select"
+            title="Developer-Type"
+            name="DeveloperType"
+            value={userData.DeveloperType}
             onChange={handleChange}
-            label="Profession"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"Trainee"}>Trainee</MenuItem>
-            <MenuItem value={"jr.Developer"}>jr.Developer</MenuItem>
-            <MenuItem value={"sr.Developer"}>sr.Developer</MenuItem>
-          </Select>
-          <ErrorText>
-            {shouldPerformValidation ? checkForEmpty(userData.Proffesion) : ""}
-          </ErrorText>
-        </FormControl>
-
-        <Myinput
-          name="UserName"
-          Mandatory={true}
-          onChange={handleChange}
-          title="Username"
-          errortext={
-            shouldPerformValidation ? validateUserName(userData.UserName) : ""
-          }
-        ></Myinput>
-        <Myinput
-          name="Password"
-          isPassword={true}
-          Mandatory={true}
-          onChange={handleChange}
-          title="Password"
-          errortext={
-            shouldPerformValidation ? validatePassword(userData.Password) : ""
-          }
-        ></Myinput>
-        <Myinput
-          name="ConfirmPassword"
-          onChange={handleChange}
-          isPassword={true}
-          Mandatory={true}
-          title="Confirm-password"
-          errortext={
-            shouldPerformValidation
-              ? validateConfirmPassword(
-                  userData.Password,
-                  userData.ConfirmPassword
-                )
-              : ""
-          }
-        ></Myinput>
-
-        <FormControl sx={{ m: 1 }} className="formcontrol">
-          <InputLabel
-            sx={{ fontSize: 11, fontWeight: 600 }}
-            id="demo-multiple-name-label"
-          >
-            Hobbies
-          </InputLabel>
-          <Select
-            sx={{ height: 40, margin: 0 }}
-            name="Hobbies"
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
-            multiple
-            value={userData.Hobbies}
-            onChange={handleChangeHobbies}
-            input={<OutlinedInput label="Name" />}
-            MenuProps={MenuProps}
-          >
-            {hobbies.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-                style={getStyles(name, userData.Hobbies, theme)}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-          <ErrorText>
-            {shouldPerformValidation ? checkForEmpty(userData.Hobbies) : ""}
-          </ErrorText>
-        </FormControl>
+            label="Developer-Type"
+            validate={shouldPerformValidation}
+            data={DeveloperType}
+          />
+        )}
+        <MultiSelect
+          className="select"
+          title="Hobbies"
+          name="Hobbies"
+          value={userData.Hobbies}
+          onChange={handleChangeHobbies}
+          data={HobbiesData}
+          validate={shouldPerformValidation}
+        />
         <Gender
+          value={userData.Gender}
           validate={shouldPerformValidation}
           setData={(data) =>
             setUserData((prevState) => ({
@@ -213,21 +167,20 @@ function UserForm() {
             }))
           }
         />
-
         <Skills
           validate={shouldPerformValidation}
-          setData={(data) =>
+          setData={(data) => {
             setUserData((prevState) => ({
               ...prevState,
               ["Skills"]: data,
-            }))
-          }
+            }));
+          }}
         />
       </div>
       <div className="buttonContainer">
         <div>
           <input
-            value={checked}
+            checked={checked === true}
             onChange={() => setChecked(!checked)}
             type="checkbox"
           ></input>

@@ -4,10 +4,10 @@
   flex-direction: column;
   border-radius: 5px;
   position: relative;
-  height: 5vh;
+  height: 5.5vh;
 }
 .div {
-  height: 15vh;
+  height: 16vh;
   border-width: 2px;
   text-align: left;
   width: 15vw;

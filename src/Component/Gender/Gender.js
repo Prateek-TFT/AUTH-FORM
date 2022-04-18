@@ -10,6 +10,11 @@ export const Gender = (props) => {
   useEffect(() => {
     props.setData(Gender);
   }, [Gender]);
+  useEffect(() => {
+    if (props.value === "") {
+      SetGender("");
+    }
+  }, [props.value]);
   return (
     <div className="genderdiv">
       <p className="p">Gender:</p>
@@ -17,24 +22,24 @@ export const Gender = (props) => {
         <input
           type="radio"
           id="Male"
-          name="Gender"
           value="Male"
+          checked={Gender === "Male"}
           onChange={handleChange}
         />
         <label for="html">Male</label>
         <input
           type="radio"
           id="Female"
-          name="Gender"
           value="Female"
+          checked={Gender === "Female"}
           onChange={handleChange}
         />
         <label for="css">Female</label>
         <input
           type="radio"
           id="Others"
-          name="Gender"
           value="Others"
+          checked={Gender === "Others"}
           onChange={handleChange}
         />
         <label for="javascript">Others</label>

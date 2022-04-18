@@ -51,11 +51,6 @@ body {
 .buttonContainer p {
   display: inline;
 }
-.buttonContainer button:hover {
-  background-color: rgb(33, 30, 30);
-  height: 4.8vh;
-  width: 9.5vw;
-}
 .buttonAlign {
   display: flex;
   flex-direction: column;
@@ -81,16 +76,25 @@ body {
   text-align: center;
 }
 
-.formcontrol {
-  width: 15vw;
+.select {
   margin: 0px !important;
+  height: 13.5vh;
+  width: 15vw;
+  padding-top: 14px !important;
+}
+.select1 {
+  margin: 0px !important;
+  height: 13.5vh;
+  width: 15vw;
+  padding-top: 14px !important;
 }
 @media screen and (max-width: 920px) {
   .box {
     flex-wrap: nowrap;
     height: auto;
   }
-  .formcontrol {
+  .select,
+  .select1 {
     width: 50vw;
   }
   .input_div {
@@ -116,7 +120,8 @@ body {
   }
 }
 @media screen and (max-width: 400px) {
-  .formcontrol {
+  .select,
+  .select1 {
     width: 80vw;
   }
   .buttonAlign button {
