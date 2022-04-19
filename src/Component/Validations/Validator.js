@@ -19,7 +19,7 @@ export const Validator = (
     !checkboxValidation(checked) &&
     !checkForEmpty(userData.Name) &&
     !checkForEmpty(userData.Hobbies) &&
-    !checkForEmpty(userData.Proffesion) &&
+    !checkForEmpty(userData.Profession) &&
     !checkForEmpty(userData.Skills) &&
     !checkForEmpty(userData.Gender) &&
     !validateEmail(userData.Email) &&
@@ -39,7 +39,7 @@ export const Validator = (
           Name: "",
           Email: "",
           Phone: "",
-          Proffesion: "",
+          Profession: "",
           Category: "",
           UserName: "",
           Password: "",

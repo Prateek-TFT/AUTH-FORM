@@ -1,5 +1,5 @@
 export const HobbiesData = ["cricket", "football", "ludo", "Reading", "Music"];
-export const ProffesionType = [
+export const ProfessionType = [
   "Trainee",
   "Junior-Developer",
   "Senior-Developer",

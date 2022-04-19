@@ -18,6 +18,7 @@ import { MultiSelect } from "../Component/Select/MultiSelect";
 import {
   HobbiesData,
   JuniorDeveloper,
+  ProfessionType,
   ProffesionType,
   SeniorDeveloper,
   Trainee,
@@ -28,7 +29,7 @@ function UserForm() {
     Name: "",
     Email: "",
     Phone: "",
-    Proffesion: "",
+    Profession: "",
     Category: "",
     UserName: "",
     Password: "",
@@ -119,21 +120,21 @@ function UserForm() {
     );
   };
   let Category = [];
-  if (userData.Proffesion === "Trainee") {
+  if (userData.Profession === "Trainee") {
     Category = Trainee;
-  } else if (userData.Proffesion === "Junior-Developer") {
+  } else if (userData.Profession === "Junior-Developer") {
     Category = JuniorDeveloper;
-  } else if (userData.Proffesion === "Senior-Developer") {
+  } else if (userData.Profession === "Senior-Developer") {
     Category = SeniorDeveloper;
   }
   useEffect(() => {
-    if (userData.Proffesion === "HR") {
+    if (userData.Profession === "HR") {
       setUserData((prevState) => ({
         ...prevState,
         ["Category"]: "",
       }));
     }
-  }, [userData.Proffesion]);
+  }, [userData.Profession]);
   return (
     <div className="box">
       <div className="heading_div">
@@ -157,22 +158,22 @@ function UserForm() {
         })}
         <SingleSelect
           className="select1"
-          title="Proffesion"
-          name="Proffesion"
-          value={userData.Proffesion}
+          title="Profession"
+          name="Profession"
+          value={userData.Profession}
           onChange={handleChange}
-          label="Proffesion"
+          label="Profession"
           validate={shouldPerformValidation}
-          data={ProffesionType}
+          data={ProfessionType}
         />
-        {userData.Proffesion && userData.Proffesion !== "HR" && (
+        {userData.Profession && userData.Profession !== "HR" && (
           <SingleSelect
             className="select"
-            title="Category"
+            title="Categories"
             name="Category"
             value={userData.Category}
             onChange={handleChange}
-            label="Category"
+            label="Categories"
             validate={shouldPerformValidation}
             data={Category}
           />
