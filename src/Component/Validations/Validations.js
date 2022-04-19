@@ -67,10 +67,8 @@ export const validateConfirmPassword = (
   if (password2.trim().length === 0) {
     return "This is a required field";
   }
-  {
-    if (password1 === password2) {
-      return "";
-    }
+  if (password1 === password2) {
+    return "";
   }
   return errorMessage;
 };

@@ -15,7 +15,7 @@ const Myinput = (props) => {
       {props.Mandatory ? <p className={Style.Asctrix}> *</p> : <p></p>}
       <div className={Style.setDirection}>
         <input
-          className={Style.input}
+          className={props.errortext ? Style.inputError : Style.input}
           value={props.value}
           name={props.name}
           type={

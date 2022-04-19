@@ -7,13 +7,13 @@ export const SingleSelect = (props) => {
   return (
     <FormControl className={props.className}>
       <InputLabel
-        sx={{ fontSize: 11, fontWeight: 600, marginTop: 0.5 }}
+        sx={{ fontSize: 11, fontWeight: 600, marginTop: 1.5 }}
         id="demo-multiple-name-label"
       >
         {props.title}
       </InputLabel>
       <Select
-        sx={{ height: 40, margin: 0, marginTop: 0.5 }}
+        sx={{ height: 40, margin: 0 }}
         labelId="demo-multiple-name-label"
         id="demo-multiple-name"
         name={props.name}
@@ -22,10 +22,14 @@ export const SingleSelect = (props) => {
         label={props.label}
       >
         <MenuItem value="">
-          <em>None</em>
+          <em>--Select--</em>
         </MenuItem>
-        {props.data.map((item) => {
-          return <MenuItem value={item}>{item}</MenuItem>;
+        {props.data.map((item, index) => {
+          return (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
+          );
         })}
       </Select>
       <ErrorText>{props.validate ? checkForEmpty(props.value) : ""}</ErrorText>

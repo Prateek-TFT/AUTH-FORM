@@ -26,6 +26,7 @@
   height: 2.5vw;
   position: absolute;
   right: 0.5vw;
+  cursor: pointer;
 }
 .setDirection {
   display: flex;
@@ -37,6 +38,15 @@
 }
 .input:focus {
   outline: 2px solid rgb(59, 130, 216);
+}
+.inputError {
+  border: 1px dashed rgb(238, 74, 74);
+  background-color: rgba(255, 225, 225, 0.674);
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  position: relative;
+  height: 5.5vh;
 }
 @media screen and (max-width: 920px) {
   .setDirection {

@@ -1,6 +1,6 @@
 import "./UserForm.css";
 import Myinput from "../Component/Input/Myinput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   checkForEmpty,
   validateEmail,
@@ -15,7 +15,13 @@ import { Validator } from "../Component/Validations/Validator";
 import { Gender } from "../Component/Gender/Gender";
 import { SingleSelect } from "../Component/Select/SingleSelect";
 import { MultiSelect } from "../Component/Select/MultiSelect";
-import { DeveloperType, HobbiesData, ProffesionType } from "../Component/Utils";
+import {
+  HobbiesData,
+  JuniorDeveloper,
+  ProffesionType,
+  SeniorDeveloper,
+  Trainee,
+} from "../Component/Utils";
 
 function UserForm() {
   const [userData, setUserData] = useState({
@@ -36,14 +42,14 @@ function UserForm() {
       value: userData.Name,
       name: "Name",
       title: "Name",
-      validation: checkForEmpty(userData.Name),
+      validation: checkForEmpty(userData.Name, "Name is a required field."),
       Mandatory: true,
     },
     {
       value: userData.Email,
       name: "Email",
       title: "Email",
-      validation: validateEmail(userData.Email),
+      validation: validateEmail(userData.Email, "Email is a required field."),
       Mandatory: true,
     },
     {
@@ -51,21 +57,27 @@ function UserForm() {
       type: "number",
       name: "Phone",
       title: "Phone",
-      validation: phoneValidation(userData.Phone),
+      validation: phoneValidation(userData.Phone, "Phone is a required field."),
       Mandatory: true,
     },
     {
       value: userData.UserName,
       name: "UserName",
       title: "UserName",
-      validation: validateUserName(userData.UserName),
+      validation: validateUserName(
+        userData.UserName,
+        "Username is a required field."
+      ),
       Mandatory: true,
     },
     {
       value: userData.Password,
       name: "Password",
       title: "Password",
-      validation: validatePassword(userData.Password),
+      validation: validatePassword(
+        userData.Password,
+        "Password is a required field."
+      ),
       Mandatory: true,
       isPassword: true,
     },
@@ -106,15 +118,32 @@ function UserForm() {
       setshouldPerformValidation
     );
   };
+  let DeveloperType = [];
+  if (userData.Proffesion === "Trainee") {
+    DeveloperType = Trainee;
+  } else if (userData.Proffesion === "Junior-Developer") {
+    DeveloperType = JuniorDeveloper;
+  } else if (userData.Proffesion === "Senior-Developer") {
+    DeveloperType = SeniorDeveloper;
+  }
+  useEffect(() => {
+    if (userData.Proffesion === "HR") {
+      setUserData((prevState) => ({
+        ...prevState,
+        ["DeveloperType"]: "",
+      }));
+    }
+  }, [userData.Proffesion]);
   return (
     <div className="box">
       <div className="heading_div">
         <h1>User Form</h1>
       </div>
       <div className="input_div">
-        {InputData.map((item) => {
+        {InputData.map((item, index) => {
           return (
             <Myinput
+              key={index}
               type={item.type}
               value={item.value}
               name={item.name}
@@ -136,7 +165,7 @@ function UserForm() {
           validate={shouldPerformValidation}
           data={ProffesionType}
         />
-        {userData.Proffesion && (
+        {userData.Proffesion && userData.Proffesion !== "HR" && (
           <SingleSelect
             className="select"
             title="Developer-Type"
@@ -187,7 +216,12 @@ function UserForm() {
           <p>I accept the term and condition</p>
         </div>
         <p className="trm_text">
-          {shouldPerformValidation ? checkboxValidation(checked) : ""}
+          {shouldPerformValidation
+            ? checkboxValidation(
+                checked,
+                "Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy"
+              )
+            : ""}
         </p>
         <div className="buttonAlign">
           <button onClick={SubmitHandler}>Submit</button>

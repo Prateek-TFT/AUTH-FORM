@@ -47,6 +47,7 @@ body {
 }
 .buttonContainer input {
   display: inline;
+  cursor: pointer;
 }
 .buttonContainer p {
   display: inline;
@@ -65,6 +66,7 @@ body {
   color: white;
   background-color: black;
   border-radius: 10px;
+  cursor: pointer;
 }
 .trm_text {
   color: red;

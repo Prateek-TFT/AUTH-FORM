@@ -29,13 +29,13 @@ export const MultiSelect = (props) => {
   return (
     <FormControl className={props.className}>
       <InputLabel
-        sx={{ fontSize: 11, fontWeight: 600, marginTop: 0.5 }}
+        sx={{ fontSize: 11, fontWeight: 600, marginTop: 1.5 }}
         id="demo-multiple-name-label"
       >
         {props.title}
       </InputLabel>
       <Select
-        sx={{ height: 40, margin: 0, marginTop: 0.5 }}
+        sx={{ height: 40, margin: 0 }}
         name={props.name}
         labelId="demo-multiple-name-label"
         id="demo-multiple-name"
@@ -45,9 +45,9 @@ export const MultiSelect = (props) => {
         input={<OutlinedInput label="Name" />}
         MenuProps={MenuProps}
       >
-        {props.data.map((name) => (
+        {props.data.map((name, index) => (
           <MenuItem
-            key={name}
+            key={index}
             value={name}
             style={getStyles(name, props.value, theme)}
           >

@@ -44,7 +44,11 @@ export const Gender = (props) => {
         />
         <label for="javascript">Others</label>
       </div>
-      <ErrorText>{props.validate ? checkForEmpty(Gender) : ""}</ErrorText>
+      <ErrorText>
+        {props.validate
+          ? checkForEmpty(Gender, "Gender is a required field.")
+          : ""}
+      </ErrorText>
     </div>
   );
 };

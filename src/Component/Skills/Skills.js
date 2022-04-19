@@ -36,7 +36,11 @@ export const Skills = (props) => {
           );
         })}
       </div>
-      <ErrorText>{props.validate ? checkForEmpty(skills) : ""}</ErrorText>
+      <ErrorText>
+        {props.validate
+          ? checkForEmpty(skills, "Skills is a required field.")
+          : ""}
+      </ErrorText>
     </>
   );
 };

@@ -4,6 +4,9 @@
   height: 5vh;
   width: 10vw;
 }
+.skillsdiv input{
+  cursor: pointer;
+}
 .skillContainer {
   display: flex;
   flex-direction: column;
