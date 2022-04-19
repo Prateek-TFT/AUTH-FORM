@@ -29,7 +29,7 @@ function UserForm() {
     Email: "",
     Phone: "",
     Proffesion: "",
-    DeveloperType: "",
+    Category: "",
     UserName: "",
     Password: "",
     ConfirmPassword: "",
@@ -118,19 +118,19 @@ function UserForm() {
       setshouldPerformValidation
     );
   };
-  let DeveloperType = [];
+  let Category = [];
   if (userData.Proffesion === "Trainee") {
-    DeveloperType = Trainee;
+    Category = Trainee;
   } else if (userData.Proffesion === "Junior-Developer") {
-    DeveloperType = JuniorDeveloper;
+    Category = JuniorDeveloper;
   } else if (userData.Proffesion === "Senior-Developer") {
-    DeveloperType = SeniorDeveloper;
+    Category = SeniorDeveloper;
   }
   useEffect(() => {
     if (userData.Proffesion === "HR") {
       setUserData((prevState) => ({
         ...prevState,
-        ["DeveloperType"]: "",
+        ["Category"]: "",
       }));
     }
   }, [userData.Proffesion]);
@@ -168,13 +168,13 @@ function UserForm() {
         {userData.Proffesion && userData.Proffesion !== "HR" && (
           <SingleSelect
             className="select"
-            title="Developer-Type"
-            name="DeveloperType"
-            value={userData.DeveloperType}
+            title="Category"
+            name="Category"
+            value={userData.Category}
             onChange={handleChange}
-            label="Developer-Type"
+            label="Category"
             validate={shouldPerformValidation}
-            data={DeveloperType}
+            data={Category}
           />
         )}
         <MultiSelect

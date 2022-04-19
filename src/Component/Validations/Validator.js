@@ -40,7 +40,7 @@ export const Validator = (
           Email: "",
           Phone: "",
           Proffesion: "",
-          DeveloperType: "",
+          Category: "",
           UserName: "",
           Password: "",
           ConfirmPassword: "",
